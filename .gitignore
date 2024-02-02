@@ -1,0 +1,8 @@
+*.wasm
+*.o
+*.a
+*.so
+.env
+
+node_modules/
+.vscode/

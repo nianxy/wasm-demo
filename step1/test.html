@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<script>
+WebAssembly.instantiateStreaming(fetch('./wasm/step1.wasm'), {}).then(obj => {
+  console.log(obj.instance.exports);
+  console.log(obj.instance.exports.add(1, 2));
+  console.log(obj.instance.exports.abs(-5));
+});
+</script>
+</body>
+</html>
