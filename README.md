@@ -3,6 +3,7 @@
 基于EMScripten来构造Web环境下运行的wasm.
 
 > EMScripten: https://emscripten.org/
+> - Download and install: https://emscripten.org/docs/getting_started/downloads.html
 
 ## EMScripten输出模式
 
@@ -24,3 +25,5 @@
 4. 生成ESM格式的js文件
 4. wasm内存管理
 5. Debug（https://emscripten.org/docs/compiling/Building-Projects.html#building-projects-with-debug-information）
+6. 使用其它库
+

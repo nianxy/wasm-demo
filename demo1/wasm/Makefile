@@ -11,3 +11,6 @@ demo1.wasm: demo1.c
 	emcc -s EXPORTED_FUNCTIONS="[_add,_abs]" $^ $(LINK_FLAG) -o $@
 
 all: demo1.wasm
+
+clean:
+	rm -f demo1.wasm
