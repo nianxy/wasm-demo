@@ -8,6 +8,9 @@
 <body>
 <script>
 var Module = {
+  locateFile: function() {
+    return "./wasm/demo2.wasm";
+  },
   onRuntimeInitialized: function() {
     console.log(Module);
     console.log(Module._add(1,2));
