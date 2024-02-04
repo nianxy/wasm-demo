@@ -23,7 +23,7 @@
 2. 使用EMScripten生成的js脚本来加载wasm
 3. 将wasm打包到js文件中
 4. 生成ESM格式的js文件
-4. wasm内存管理
-5. Debug（https://emscripten.org/docs/compiling/Building-Projects.html#building-projects-with-debug-information）
-6. 使用其它库
+5. 数据类型和内存管理
+6. Debug（https://emscripten.org/docs/compiling/Building-Projects.html#building-projects-with-debug-information）
+7. 使用其它库
 

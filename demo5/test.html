@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<canvas id="input" width="400" height="400"></canvas>
+<canvas id="output" width="400" height="400"></canvas>
+<script type="module">
+import Demo4 from './wasm/demo5.js';
+
+const moduleSettings = {
+  locateFile: function() {
+    return "./wasm/demo4.wasm";
+  }
+};
+
+Demo4(moduleSettings).then(Module => {
+  console.log("plus100:", Module._plus100(99), Module._plus100(100));
+  console.log("plus100f:", Module._plus100f(99), Module._plus100f(100));
+
+  // 字符串操作比较麻烦，要在JS String和UTF8之间转换
+  const str = "Hello, World!";
+  let p_str = Module._malloc(str.length*4+1);
+  Module.stringToUTF8(str, p_str, str.length*4+1);
+  let p_str_out = Module._string_duplicate(p_str, 2);
+  console.log('ptr', p_str, p_str_out);
+  console.log("str:", Module.UTF8ToString(p_str_out));
+  Module._free(p_str);
+  Module._free(p_str_out);
+
+  // ArrayBuffer
+  const img1 = document.getElementById('input').getContext('2d');
+  const img2 = document.getElementById('output').getContext('2d');
+  // draw image from url to img1
+  const img = new Image();
+  img.src = './test.jpeg';
+  img.onload = function() {
+    img1.drawImage(img, 0, 0, 400, 400);
+    const imgData = img1.getImageData(0, 0, 400, 400);
+    let imgbuf = Module._malloc(imgData.data.length);
+    Module.HEAPU8.set(imgData.data, imgbuf);
+    const imgbuf_js = new Uint8ClampedArray(Module.HEAPU8.buffer, imgbuf, imgData.data.length);
+    Module._rgb_to_gray(imgbuf, 400, 400, 0);
+    img2.putImageData(new ImageData(imgbuf_js, 400, 400), 0, 0);
+    Module._free(imgbuf);
+  };
+  
+
+});
+
+</script>
+</body>
+</html>
