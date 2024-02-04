@@ -12,11 +12,15 @@
 
 实际工作中，使用上述2最多，3有时会用。
 
-在Step1中，我们先看下第3种情况的开发方法。
+## 运行方法
 
-## Demo步骤
+在项目目录下执行`npm install`来安装`servez`，然后通过`npm run dev`来启动一个HTTP Server。
+
+## Demo
 
 1. 创建并运行一个最简单的wasm
-2. EMScripten生成wasm的不同方式
+2. 使用EMScripten生成的js脚本来加载wasm
 3. 将wasm打包到js文件中
+4. 生成ESM格式的js文件
 4. wasm内存管理
+5. Debug（https://emscripten.org/docs/compiling/Building-Projects.html#building-projects-with-debug-information）

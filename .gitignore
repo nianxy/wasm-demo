@@ -4,5 +4,7 @@
 *.so
 .env
 
+**/wasm/*.js
+
 node_modules/
 .vscode/

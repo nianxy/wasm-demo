@@ -7,7 +7,7 @@
 </head>
 <body>
 <script>
-WebAssembly.instantiateStreaming(fetch('./wasm/step1.wasm'), {}).then(obj => {
+WebAssembly.instantiateStreaming(fetch('./wasm/demo1.wasm'), {}).then(obj => {
   console.log(obj.instance.exports);
   console.log(obj.instance.exports.add(1, 2));
   console.log(obj.instance.exports.abs(-5));

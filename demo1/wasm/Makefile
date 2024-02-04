@@ -7,7 +7,7 @@ LINK_FLAG = \
     -s FILESYSTEM=0 \
     --no-entry
 
-step1.wasm: step1.c
+demo1.wasm: demo1.c
 	emcc -s EXPORTED_FUNCTIONS="[_add,_abs]" $^ $(LINK_FLAG) -o $@
 
-all: step1.wasm
+all: demo1.wasm
