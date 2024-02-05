@@ -5,6 +5,7 @@
 .env
 
 **/wasm/*.js
+**/build
 
 node_modules/
 .vscode/

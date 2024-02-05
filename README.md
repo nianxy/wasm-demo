@@ -1,7 +1,8 @@
 # wasm-demo
 
-基于EMScripten来构造Web环境下运行的wasm.
+这个项目主要就来演示如何基于EMScripten来构造Web环境下运行的wasm，并不对WebAssembly做过多解释。
 
+> WebAssembly: https://developer.mozilla.org/en-US/docs/WebAssembly
 > EMScripten: https://emscripten.org/
 > - Download and install: https://emscripten.org/docs/getting_started/downloads.html
 
@@ -24,6 +25,7 @@
 3. 将wasm打包到js文件中
 4. 生成ESM格式的js文件
 5. 数据类型和内存管理
-6. Debug（https://emscripten.org/docs/compiling/Building-Projects.html#building-projects-with-debug-information）
+6. Debug
+7. 使用CMake
 7. 使用其它库
 
