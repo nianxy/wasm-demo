@@ -4,8 +4,6 @@ LINK_FLAG = \
     -s STACK_SIZE=128KB \
     -s ENVIRONMENT="web" \
     -s FILESYSTEM=0 \
-    -s SINGLE_FILE=1 \
-    -s MODULARIZE=1 \
     -s EXPORT_ES6=1 \
     --no-entry
 
@@ -15,4 +13,4 @@ demo4.js: demo4.c
 all: demo4.js
 
 clean:
-	rm -f demo4.js
+	rm -f demo4.js demo4.wasm

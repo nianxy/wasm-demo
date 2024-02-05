@@ -9,15 +9,9 @@
 <canvas id="input" width="400" height="400"></canvas>
 <canvas id="output" width="400" height="400"></canvas>
 <script type="module">
-import Demo4 from './wasm/demo5.js';
+import Demo5 from './wasm/demo5.js';
 
-const moduleSettings = {
-  locateFile: function() {
-    return "./wasm/demo4.wasm";
-  }
-};
-
-Demo4(moduleSettings).then(Module => {
+Demo5().then(Module => {
   console.log("plus100:", Module._plus100(99), Module._plus100(100));
   console.log("plus100f:", Module._plus100f(99), Module._plus100f(100));
 

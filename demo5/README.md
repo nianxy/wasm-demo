@@ -91,4 +91,5 @@ Demo5的C代码实现了几个方法，分别用来处理`nubmer`、图像数据
 
 关注点：
 1. Makefile中的导出函数列表中，需要有`_malloc`和`_free`
-2. Makefile中导出了一组`EXPORT_RUNTIME_FUNCS`，用来处理上述提到的UTF8和JS字符串之间的转换
+2. Makefile中导出了一组`EXPORTED_RUNTIME_METHODS`，用来处理上述提到的UTF8和JS字符串之间的转换
+  - EXPORT_RUNTIME_FUNCS: https://emscripten.org/docs/tools_reference/settings_reference.html#exported-runtime-methods
