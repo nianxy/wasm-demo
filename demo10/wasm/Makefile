@@ -1,5 +1,6 @@
+OPT_FLAG = -O3
+
 LINK_FLAG = \
-    -O3 \
     -s NO_FILESYSTEM \
     -s INITIAL_MEMORY=1MB \
     -s STACK_SIZE=128KB \
@@ -8,13 +9,10 @@ LINK_FLAG = \
     -s EXPORT_ES6=1 \
     --no-entry
 
-LIBS = \
-    -lembind
+demo10.js: demo10.c
+	emcc -s EXPORTED_FUNCTIONS="[_add]" $^ $(LINK_FLAG) $(OPT_FLAG) -o $@
 
-demo9.js: demo9.cpp
-	emcc $^ $(LINK_FLAG) ${LIBS} -o $@
-
-all: demo9.js
+all: demo10.js
 
 clean:
-	rm -f demo9.js demo9.wasm
+	rm -f demo10.js demo10.wasm
