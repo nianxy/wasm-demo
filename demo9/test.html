@@ -15,12 +15,16 @@ Demo9().then(Module => {
   const c = new Module.Counter(10);
 
   for (let i = 0; i < 10; i++) {
-    if (i==5) {
-      console.log(c.getValue());
-    }
-    c.increase();
+    console.log(c.increase());
   }
-  console.log(c.getValue());
+
+  const size = 5;
+  const ptr = Module._malloc(size*4);
+  let numbers = new Int32Array(Module.HEAP8.buffer, ptr, size*4);
+  numbers.set([1, 2, 3, 4, 5]);
+  console.log("sum:", c.sum(ptr, size));
+  Module._free(ptr);
+  numbers = null;
 });
 </script>
 </body>

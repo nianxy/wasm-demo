@@ -1,5 +1,5 @@
 LINK_FLAG = \
-    -O3 \
+    -g \
     -s NO_FILESYSTEM \
     -s INITIAL_MEMORY=1MB \
     -s STACK_SIZE=128KB \
@@ -12,7 +12,7 @@ LIBS = \
     -lembind
 
 demo9.js: demo9.cpp
-	emcc $^ $(LINK_FLAG) ${LIBS} -o $@
+	emcc $^ -s EXPORTED_RUNTIME_METHODS="[_malloc,_free]" $(LINK_FLAG) ${LIBS} -o $@
 
 all: demo9.js
 
