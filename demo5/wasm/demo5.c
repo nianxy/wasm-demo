@@ -1,5 +1,6 @@
 #include <string.h>
 #include <stdlib.h>
+#include <assert.h>
 
 // 返回一个新的字符串，需要通过free释放
 const char* string_duplicate(const char* str, int duplicate_times) {
@@ -33,6 +34,23 @@ void rgb_to_gray(unsigned char* data, int width, int height, int format) {
       data[base + 0] = c;
       data[base + 1] = c;
       data[base + 2] = c;
+    }
+  }
+}
+
+void conv(unsigned char *p, int width, int height, int kernel_size) {
+  assert(kernel_size&0x1);
+  unsigned char *kernal = malloc(kernel_size * kernel_size * sizeof(unsigned char));
+  int padding = kernel_size / 2;
+  for (int i = padding; i < height - padding; ++i) {
+    for (int j = padding; j < width - padding; ++j) {
+      unsigned char sum = 0;
+      for (int m = -padding; m <= padding; ++m) {
+        for (int n = -padding; n <= padding; ++n) {
+          sum += p[(i+m)*width + j+n] * kernal[(m+padding)*kernel_size + n+padding];
+        }
+      }
+      p[i*width + j] = sum;
     }
   }
 }

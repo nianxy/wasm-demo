@@ -3,6 +3,7 @@ EXPORT_FUNCS = \
     _plus100, \
     _plus100f, \
     _rgb_to_gray, \
+    _conv, \
     _malloc, \
     _free
 
@@ -11,8 +12,9 @@ EXPORT_RUNTIME_FUNCS = \
     stringToUTF8
 
 LINK_FLAG = \
+    -O3 \
     -s NO_FILESYSTEM \
-    -s INITIAL_MEMORY=1MB \
+    -s INITIAL_MEMORY=5MB \
     -s STACK_SIZE=128KB \
     -s ENVIRONMENT="web" \
     -s FILESYSTEM=0 \

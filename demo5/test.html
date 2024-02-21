@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="//static.cdn.oppenlab.com/common/vconsole/3.3.4/vconsole.min.js"></script>
+  <script>
+      var vConsole = new VConsole;
+  </script>
   <title>Document</title>
 </head>
 <body>
@@ -40,10 +44,49 @@ Demo5().then(Module => {
     Module._rgb_to_gray(imgbuf, 400, 400, 0);
     img2.putImageData(new ImageData(imgbuf_js, 400, 400), 0, 0);
     Module._free(imgbuf);
-  };
-  
 
+    console.log('test for performance');
+
+    const width = 256;
+    const height = 256;
+    const dataSize = width * height;
+    const kernelSize = 3;
+    const ptr = Module._malloc(dataSize);
+    const data = new Uint8ClampedArray(Module.HEAP8.buffer, ptr, dataSize);
+
+    let tm = performance.now();
+    conv(data, width, height, kernelSize);
+    console.log('js conv:', performance.now() - tm);
+
+    tm = performance.now();
+    Module._conv(ptr, width, height, kernelSize);
+    console.log('wasm conv:', performance.now() - tm);
+  };
 });
+
+function conv(data, width, height, kernel_size) {
+  if (kernel_size % 2 == 0) {
+    console.error("kernel size must be odd");
+    return;
+  }
+  const kernal = [
+    1, 1, 1,
+    1, 1, 1,
+    1, 1, 1
+  ];
+  const padding = Math.floor(kernel_size / 2);
+  for (let i = padding; i < height - padding; ++i) {
+    for (let j = padding; j < width - padding; ++j) {
+      let sum = 0;
+      for (let m = -padding; m <= padding; ++m) {
+        for (let n = -padding; n <= padding; ++n) {
+          sum += data[(i+m)*width + j+n] * kernal[(m+padding)*kernel_size + n+padding];
+        }
+      }
+      data[i*width + j] = sum;
+    }
+  }
+}
 
 </script>
 </body>
